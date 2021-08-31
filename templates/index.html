@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block head %}
+Similarity search
+{% endblock %}
+{% block body %}
+
+<div class="content">
+    <h1 style="text-align: center">Similarity-based rejection search</h1>
+    {% if tasks|length < 1 %}
+    <h4 style="text-align: center">Please enter your smile below!</h4>
+    {% else %}
+    <table>
+        <tr>
+			<th rowspan="2">Entered SMILES</th>
+			<th rowspan="2">Dataset SMILES</th>
+			<th rowspan="2">Structure</th>
+            <th rowspan="2">Tanimoto<br></br>coefficient</th>
+			<th colspan="6">Rejection</th>
+		</tr>
+		<tr>
+			<th>DM150<br></br>10 bar</th>
+			<th>DM200<br></br>10 bar</th>
+			<th>DM300<br></br>10 bar</th>
+			<th>DM150<br></br>20 bar</th>
+			<th>DM200<br></br>20 bar</th>
+			<th>DM300<br></br>20 bar</th>
+		</tr>
+            <tr>
+                <td>{{ tasks[0] }}</td>
+                <td>{{ tasks[1] }}</td>
+                <td><img src="{{url_for('static', filename='dataset_image.png')}}" alt="dataset_image" height="200" width="200"></td>
+                <td>{{ tasks[2] }}</td>
+                <td>{{ tasks[3] }}</td>
+                <td>{{ tasks[4] }}</td>
+                <td>{{ tasks[5] }}</td>
+                <td>{{ tasks[6] }}</td>
+                <td>{{ tasks[7] }}</td>
+                <td>{{ tasks[8] }}</td>
+                <td>{{ tasks[9] }}</td>
+            </tr>
+    </table>
+    {% endif %}
+
+    <div class="form">
+        <form action="/" method="POST">
+            <input type="text" name="content" id="content">
+            <input type="submit" value="Insert SMILE">
+        </form>
+    </div>
+</div>
+{% endblock %}
