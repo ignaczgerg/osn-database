@@ -6,9 +6,12 @@ Similarity search
 {% block body %}
 
 <div class="content">
-    <h1 style="text-align: center">Similarity-based rejection search</h1>
+    <h5>To use the similarity based rejection search use the SMILES of a molecule. 
+        SMILES (simplified molecular-input line-entry system) is the string-based representation of a 
+        molecule. For example, the SMILES of n-butanol is CCCO. 
+    </h5>
     {% if tasks|length < 1 %}
-    <h4 style="text-align: center">Please enter your smile below!</h4>
+    <p style="text-align: center">Please enter your SMILES below!</p>
     {% else %}
     <table>
         <tr>
@@ -16,7 +19,7 @@ Similarity search
 			<th rowspan="2">Dataset SMILES</th>
 			<th rowspan="2">Structure</th>
             <th rowspan="2">Tanimoto<br></br>coefficient</th>
-			<th colspan="6">Rejection</th>
+			<th colspan="6">Rejection (%)<br></br>DM: Duramem membrane</th>
 		</tr>
 		<tr>
 			<th>DM150<br></br>10 bar</th>
@@ -45,8 +48,13 @@ Similarity search
     <div class="form">
         <form action="/" method="POST">
             <input type="text" name="content" id="content">
-            <input type="submit" value="Insert SMILE">
+            <input type="submit" value="Get rejection">
         </form>
     </div>
+    <p></p>
+    <p>The 'Dataset SMILES' refers to the closest molecule in the dataset 
+        measured in our experiments (more information under the Contact page).
+        The Tanimoto coefficient refers to the similarity between your molecule and the closest molecule in the dataset.
+    </p>
 </div>
 {% endblock %}

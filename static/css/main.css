@@ -3,6 +3,7 @@ body, html {
     font-family: sans-serif;
     background-color: white;
     color: black;
+    text-align: center;
 }
 
 .content {

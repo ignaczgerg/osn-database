@@ -19,13 +19,13 @@ def index():
         Draw.MolToFile(similar[1],'static/dataset_image.png') 
         retrieved_features = [user_smiles, 
                                 str(similar[2].iloc[0]),
-                                round(similar[0][1],3), 
-                                similar[2].iloc[1],
-                                similar[2].iloc[2],
-                                similar[2].iloc[3],
-                                similar[2].iloc[4],
-                                similar[2].iloc[5],
-                                similar[2].iloc[6]]
+                                round(similar[0][1],2), 
+                                int(similar[2].iloc[1]*100),
+                                int(similar[2].iloc[2]*100),
+                                int(similar[2].iloc[3]*100),
+                                int(similar[2].iloc[4]*100),
+                                int(similar[2].iloc[5]*100),
+                                int(similar[2].iloc[6]*100)]
         try:
             return render_template("index.html", tasks = retrieved_features)
         except:
@@ -35,5 +35,12 @@ def index():
         return render_template('index.html')
 
 
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        return render_template('contact.html')
+    return render_template('contact.html')
+
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=False)
