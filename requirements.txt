@@ -5,3 +5,5 @@ rdkit-pypi
 gunicorn
 Flask
 Jinja2
+mordred
+scikit-learn
