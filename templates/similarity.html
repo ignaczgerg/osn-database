@@ -1,11 +1,143 @@
 {% extends 'base.html' %}
-
 {% block head %}
-{{ super() }}
 Similarity search
 {% endblock %}
 {% block body %}
-{{ super() }}
+
+
+<div class="card">
+    <div class="card-header">
+      Similarity search
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">SMILES-based similarity-search to compare solute rejection in OSN</h5>
+      <p class="card-text">To use the similarity based rejection search use the SMILES of a molecule. 
+        SMILES (simplified molecular-input line-entry system) is the string-based representation of a 
+        molecule. For example, the SMILES of n-butanol is CCCO. The model currently works only in methanol.</p>
+
+
+        <div class="content">
+            {% if tasks|length < 1 %}
+            <p style="text-align: center">Please enter your SMILES below!</p>
+            {% else %}
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th rowspan="2">Entered SMILES</th>
+                        <th rowspan="2">Dataset SMILES</th>
+                        <th rowspan="2">Structure</th>
+                        <th rowspan="2">Tanimoto<br></br>coefficient</th>
+                        <th colspan="6">Rejection in methanol (%)<br></br>DM: Duramem membrane</th>
+                    </tr>
+                    <tr>
+                        <th>DM150<br></br>10 bar</th>
+                        <th>DM200<br></br>10 bar</th>
+                        <th>DM300<br></br>10 bar</th>
+                        <th>DM150<br></br>20 bar</th>
+                        <th>DM200<br></br>20 bar</th>
+                        <th>DM300<br></br>20 bar</th>
+                    </tr>
+                        <tr>
+                            <td>{{ tasks[0] }}</td>
+                            <td>{{ tasks[1] }}</td>
+                            <td><img src="{{url_for('static', filename='dataset_image.png')}}" alt="dataset_image" height="100" width="100"></td>
+                            <td>{{ tasks[2] }}</td>
+                            <td>{{ tasks[3] }}</td>
+                            <td>{{ tasks[4] }}</td>
+                            <td>{{ tasks[5] }}</td>
+                            <td>{{ tasks[6] }}</td>
+                            <td>{{ tasks[7] }}</td>
+                            <td>{{ tasks[8] }}</td>
+                            
+                        </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table> 
+            {% endif %}
+        
+            <div class="form">
+                <form style="text-align: center" action="/similarity" method="POST">
+                    <input type="text" name="content" id="content">
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+            <p></p>
+            <p>The 'Dataset SMILES' refers to the closest molecule in the dataset 
+                measured in our experiments (more information under the Contact page).
+                The Tanimoto coefficient refers to the similarity between your molecule and the closest molecule in the dataset.
+            </p>
+        </div>
+
+    </div>
+  </div>
+
+
+<!-- 
+<div class="card">
+    <div class="card-header">
+      Similarity search
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">To use the similarity based rejection search use the SMILES of a molecule. 
+        SMILES (simplified molecular-input line-entry system) is the string-based representation of a 
+        molecule. For example, the SMILES of n-butanol is CCCO.</p>
+
+
+        <div class="content">
+            {% if tasks|length < 1 %}
+            <p style="text-align: center">Please enter your SMILES below!</p>
+            {% else %}
+            <table>
+                <tr>
+                    <th rowspan="2">Entered SMILES</th>
+                    <th rowspan="2">Dataset SMILES</th>
+                    <th rowspan="2">Structure</th>
+                    <th rowspan="2">Tanimoto<br></br>coefficient</th>
+                    <th colspan="6">Rejection (%)<br></br>DM: Duramem membrane</th>
+                </tr>
+                <tr>
+                    <th>DM150<br></br>10 bar</th>
+                    <th>DM200<br></br>10 bar</th>
+                    <th>DM300<br></br>10 bar</th>
+                    <th>DM150<br></br>20 bar</th>
+                    <th>DM200<br></br>20 bar</th>
+                    <th>DM300<br></br>20 bar</th>
+                </tr>
+                    <tr>
+                        <td>{{ tasks[0] }}</td>
+                        <td>{{ tasks[1] }}</td>
+                        <td><img src="{{url_for('static', filename='dataset_image.png')}}" alt="dataset_image" height="200" width="200"></td>
+                        <td>{{ tasks[2] }}</td>
+                        <td>{{ tasks[3] }}</td>
+                        <td>{{ tasks[4] }}</td>
+                        <td>{{ tasks[5] }}</td>
+                        <td>{{ tasks[6] }}</td>
+                        <td>{{ tasks[7] }}</td>
+                        <td>{{ tasks[8] }}</td>
+                        <td>{{ tasks[9] }}</td>
+                    </tr>
+            </table>
+            {% endif %}
+        
+            <div class="form">
+                <form action="/similarity" method="POST">
+                    <input type="text" name="content" id="content">
+                    <input type="submit" value="Get rejection">
+                </form>
+            </div>
+            <p></p>
+            <p>The 'Dataset SMILES' refers to the closest molecule in the dataset 
+                measured in our experiments (more information under the Contact page).
+                The Tanimoto coefficient refers to the similarity between your molecule and the closest molecule in the dataset.
+            </p>
+        </div>
+
+    </div>
+  </div>
+
 
 <div class="content">
     <h5>To use the similarity based rejection search use the SMILES of a molecule. 
@@ -58,5 +190,5 @@ Similarity search
         measured in our experiments (more information under the Contact page).
         The Tanimoto coefficient refers to the similarity between your molecule and the closest molecule in the dataset.
     </p>
-</div>
+</div> -->
 {% endblock %}

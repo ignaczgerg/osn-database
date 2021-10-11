@@ -5,11 +5,11 @@ body, html {
     color: black;
     text-align: center;
 }
-
+/* 
 .content {
     margin: 0 auto;
     width: 1200px;
-}
+} */
 
 table, td, th {
     border: 1px solid #aaa;

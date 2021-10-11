@@ -62,9 +62,15 @@ def pls_prediction():
             return render_template("pls-prediction.html", tasks = retrieved_features)
         except:
             return 'There was an error adding your task'
-
     if request.method == "GET":
         return render_template("pls-prediction.html")
+
+
+@app.route('/publications', methods=['GET', 'POST'])
+def publications():
+    if request.method == 'POST':
+        return render_template('publications.html')
+    return render_template('publications.html')
 
 
 @app.route('/contact', methods=['GET', 'POST'])
@@ -75,4 +81,4 @@ def contact():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
