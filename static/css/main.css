@@ -11,6 +11,13 @@ body, html {
     width: 1200px;
 } */
 
+.pls_model_image{
+display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 table, td, th {
     border: 1px solid #aaa;
 }
