@@ -32,6 +32,9 @@ Solute rejection prediction
                 <thead>
                     <tr>
                         <th rowspan="2">Entered SMILES</th>
+                        <th rowspan="2">Membrane type</th>
+                        <th rowspan="2">Pressure</th>
+                        
                         <th rowspan="2">Predicted rejection (%)</th>
                         <th rowspan="2">Structure</th>
                     </tr>
@@ -39,6 +42,9 @@ Solute rejection prediction
                     </tr>
                     <tr>
                         <td>{{ tasks[0] }}</td>
+                        <td>Duramem 150</td>
+                        <td>20 bar</td>
+                        
                         <td>{{ tasks[1] }}</td>
                         <td><img src="{{url_for('static', filename='dataset_image.png')}}" alt="dataset_image" height="80" width="80"></td>
                     </tr>
