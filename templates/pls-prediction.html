@@ -49,7 +49,7 @@ Solute rejection prediction
                         <td>20 bar</td>
                         
                         <td>{{ tasks[1] }}</td>
-                        <td><img src="{{url_for('static', filename='dataset_image.png')}}" alt="dataset_image" height="80" width="80"></td>
+                        <td><img src="{{url_for('static', filename='dataset_image.png')}}" alt="dataset_image" height="100" width="80"></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,7 +59,7 @@ Solute rejection prediction
         
             <div class="form">
                 <form style="text-align: center" action="/pls-prediction" method="POST">
-                    <input type="text" name="content" id="content">
+                    <input type="text" name="content" id="content" placeholder='CCCCBr'>
                     <input type="submit" value="Predict rejection">
                 </form>
             </div>
