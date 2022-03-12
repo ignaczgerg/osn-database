@@ -75,14 +75,40 @@ Contact information
 
 <main>
   <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
+    <div class="row py-lg-3">
+      <div class="col-lg-12 col-md-8 mx-auto">
         
-        <h1 class="fw-light">OSN Database</h1>
-        <p class="lead text-muted">The OSN Database is mainted by Gergo Ignacz and Gyorgy Szekely</p>
+        <h1 class="fw-light">Literature OSN Database</h1>
+        <p class="lead text-muted">This dataset was constructed to establish predictive models for membrane performance 
+          that can fast-track and facilitate the industrial applications of organic solvent nanofiltration (OSN). 
+          As OSN performance is difficult to understand and predict due to its complex multi-dimensional relationship, 
+          we aim to perform data-driven prediction using a large set of well constructured experimental data. </p>
+
+          <p class="lead text-muted">The whole dataset consists of 42,290 datapoints with 4,229 rows and 10 columns 
+            compiled from 78 articles from 2002 onwards. Only commercial OSN membranes were considered. 
+            We included 10 parameters: the type of membranes, concentration of solute, MWCO of solute, testing solvent, 
+            transmembrane pressure, flux, permeance, rejection, operating temperature and process configuration.</p>
+
+          <p>
+            <img class="pls_model_image" src="/static/conventional_vs_ai.jpeg" alt="Card image cap" width="738" height="407">
+
+          </p>
+
+          <p class="lead text-muted">In the published machine learning project, we first performed dimension reduction analysis 
+            using statistical PCA tool to better extract the underlying trends. Then, we applied three different algorithms: 
+            artificial neural network (ANN), support vector (SVM), and random forest (RF). 
+            The trained AI model showed up to 90% (RMSE: 1.133 for ANN and 0.905 for SVM; R2: 0.900 for ANN and 0.914 for SVM) 
+            and 91% (RMSE: 12.138 for ANN and 13.234 for SVM; R2: 0.914 for ANN and 0.906 for SVM) 
+            prediction accuracy for permeance and rejection, respectively.  </p>
+
+          <p class="lead text-muted">
+            The original article titled Artificial intelligence for performance 
+            prediction of organic solvent nanofiltration membranes was written by
+            Jiahui Hu, Changsu Kim, Peter Halasz, Jeong F. Kim, Jiyong Kim and Gyorgy Szekely.
+          </p>
         <p>
-          <a href="https://szekelygroup.com" class="btn btn-primary my-2">Szekely's Group website</a>
-          <a href=mailto:info@osndatabase.com?subject class="btn btn-secondary my-2">Contact us</a>
+          <a href="sad" class="btn btn-primary my-2">Download the dataset</a>
+          <a href="https://www.sciencedirect.com/science/article/pii/S0376738820310905?casa_token=MNc56J85ErEAAAAA:c7URnVC3k7sXOEzNXp3wcpaBsHK9YzvSp-LZh15K1tHo_5M4NoXkZaiNy-nJoXxDblwQJir4uxU#undfig1" class="btn btn-secondary my-2">Original publication</a>
         </p>
       </div>
     </div>

@@ -80,5 +80,12 @@ def contact():
     return render_template('contact.html')
 
 
+@app.route('/literature_database', methods=['GET', 'POST'])
+def literature_database():
+    if request.method == 'POST':
+        return render_template('literature_database.html')
+    return render_template('literature_database.html')
+
+
 if __name__ == "__main__":
     app.run(debug=True)
