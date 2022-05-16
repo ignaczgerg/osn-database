@@ -37,7 +37,7 @@ def similarity():
         try:
             return render_template("similarity.html", tasks = retrieved_features)
         except:
-            return 'There was an error adding your task'
+            return 'There was an error adding your molecule. Please check the SMILES if they are correct. The model works reliably for molecules between 50-1000 g/mol having no metal ions.'
 
     if request.method == "GET":
         return render_template("similarity.html")
@@ -53,7 +53,7 @@ def pls_prediction():
             user_descr = predictor.descripter(user_smiles)
             prediction = predictor.predictor(user_descr)
         except:
-            return 'Wrong SMILES, please try again. Currently, molecules with more than 5 heavy atoms work'
+            return 'Wrong SMILES, please try again. Currently, molecules with more than 5 heavy atoms work only.'
 
         Draw.MolToFile(Chem.MolFromSmiles(user_smiles),'static/dataset_image.png') 
         retrieved_features = [user_smiles, 

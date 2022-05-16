@@ -23,7 +23,7 @@ descriptors_used =  ['NssssN', 'SssssN', 'ETA_shape_y', 'RNCG', 'AATSC1are',
        'MWC03', 'VR3_Dzi', 'ATS8m']
 
 descriptors_dict = dict(zip(descriptors_used, zeros(len(descriptors_used))))
-print(descriptors_dict)
+# print(descriptors_dict)
 '''
 Iterate over all the key value pairs in dictionary and call the given
 callback function() on each pair. Items for which callback() returns True,

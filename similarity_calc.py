@@ -11,7 +11,7 @@ class DataLoader(object):
     def csv_loader(file_url):
         _df = pd.read_csv(file_url, sep=',')
         return _df
-    
+
 
 class Similarity(object):
     def __init__(self, dataframe: pd.DataFrame, reference: str):
