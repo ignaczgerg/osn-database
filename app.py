@@ -87,5 +87,18 @@ def literature_database():
     return render_template('literature_database.html')
 
 
+@app.route('/legal', methods=['GET', 'POST'])
+def legal():
+    if request.method == 'POST':
+        return render_template('legal.html')
+    return render_template('legal.html')
+
+
+@app.route('/what_is_osn', methods=['GET', 'POST'])
+def what_is_osn():
+    if request.method == 'POST':
+        return render_template('what_is_osn.html')
+    return render_template('what_is_osn.html')
+
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
