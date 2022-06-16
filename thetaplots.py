@@ -1,10 +1,14 @@
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import process as pro
+import base64
+from io import BytesIO
+from matplotlib.figure import Figure
+import mpld3
 
 
-def calculate_diagrams(user_r_rejection, user_s_rejection, user_r_racemate):
+def calculate_values(user_r_rejection, user_s_rejection, user_r_racemate):
     P = 4e-6; 
     A = 300; # cm2
     dp = 20; # bar
@@ -149,72 +153,75 @@ def calculate_diagrams(user_r_rejection, user_s_rejection, user_r_racemate):
         eta3Rp[k] = 100-eta3Rr[k]
         k+=1
 
+    return theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, eta_Sr, eta_Sp, ee2R, ee2S, eta2R, eta2S, ee3Rr, ee3Rp, ee3Sr, ee3Sp, eta3Rr, eta3Rp, eta3Sr, eta3Sp
 
-    # fig, axs = plt.subplots(2, 3, figsize=(15,7), tight_layout=True)
-    # axs[0,0].plot(theta, ee_Rr, label='Retentate - R', color='blue')
-    # axs[0,0].plot(theta, ee_Rp, label='Permeate - R', color='blue', linestyle='dashed')
-    # axs[0,0].plot(theta, ee_Sr, label='Retentate - S', color='orange')
-    # axs[0,0].plot(theta, ee_Sp, label='Permeate - S', color='orange', linestyle='dashed')
-    # axs[0,0].legend(loc='upper left')
-    # axs[0,0].set_title('Enantiomeric excess - single stage')
-    # axs[1,0].plot(theta, eta_Rr, label='Retentate - R', color='blue')
-    # axs[1,0].plot(theta, eta_Rp, label='Permeate - R', color='blue', linestyle='dashed')
-    # axs[1,0].plot(theta, eta_Sr, label='Retentate - S', color='orange')
-    # axs[1,0].plot(theta, eta_Sp, label='Permeate - S', color='orange', linestyle='dashed')
-    # axs[1,0].legend(loc='upper left')
-    # axs[1,0].set_title('Recovery - single stage')
-    # axs[0,1].plot(theta2, ee2R, label='R', color='blue')
-    # axs[0,1].plot(theta2, ee2S, label='S', color='orange')
-    # axs[0,1].legend(loc='upper left')
-    # axs[0,1].set_title('Enantiomeric excess - SRR')
-    # axs[1,1].plot(theta2, eta2R, label='R', color='blue')
-    # axs[1,1].plot(theta2, eta2S, label='S', color='orange')
-    # axs[1,1].legend(loc='upper left')
-    # axs[1,1].set_title('Recovery - SRR')
-    # axs[0,2].plot(theta3, ee3Rr, label='Retentate - R', color='blue')
-    # axs[0,2].plot(theta3, ee3Rp, label='Permeate - R', color='blue', linestyle='dashed')
-    # axs[0,2].plot(theta3, ee3Sr, label='Retentate - S', color='orange')
-    # axs[0,2].plot(theta3, ee3Sp, label='Permeate - S', color='orange', linestyle='dashed')
-    # axs[0,2].legend(loc='upper left')
-    # axs[0,2].set_title('Enantiomeric excess - 2-stage permeate cascade')
-    # axs[1,2].plot(theta3, eta3Rr, label='Retentate - R', color='blue')
-    # axs[1,2].plot(theta3, eta3Rp, label='Permeate - R', color='blue', linestyle='dashed')
-    # axs[1,2].plot(theta3, eta3Sr, label='Retentate - S', color='orange')
-    # axs[1,2].plot(theta3, eta3Sp, label='Permeate - S', color='orange', linestyle='dashed')
-    # axs[1,2].legend(loc='upper left')
-    # axs[1,2].set_title('Recovery - 2-stage permeate cascade')
+def plotting(theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, eta_Sr, eta_Sp, ee2R, ee2S, eta2R, eta2S, ee3Rr, ee3Rp, ee3Sr, ee3Sp, eta3Rr, eta3Rp, eta3Sr, eta3Sp):
+    fig = Figure(figsize=(10,5.5), tight_layout=True)
+    axs = fig.subplots(2, 3)
+    axs[0,0].plot(theta, ee_Rr, label='Retentate - R', color='blue')
+    axs[0,0].plot(theta, ee_Rp, label='Permeate - R', color='blue', linestyle='dashed')
+    axs[0,0].plot(theta, ee_Sr, label='Retentate - S', color='orange')
+    axs[0,0].plot(theta, ee_Sp, label='Permeate - S', color='orange', linestyle='dashed')
+    axs[0,0].legend(loc='upper left')
+    axs[0,0].set_title('Enantiomeric excess - single stage')
+    axs[1,0].plot(theta, eta_Rr, label='Retentate - R', color='blue')
+    axs[1,0].plot(theta, eta_Rp, label='Permeate - R', color='blue', linestyle='dashed')
+    axs[1,0].plot(theta, eta_Sr, label='Retentate - S', color='orange')
+    axs[1,0].plot(theta, eta_Sp, label='Permeate - S', color='orange', linestyle='dashed')
+    axs[1,0].legend(loc='upper left')
+    axs[1,0].set_title('Recovery - single stage')
+    axs[0,1].plot(theta2, ee2R, label='R', color='blue')
+    axs[0,1].plot(theta2, ee2S, label='S', color='orange')
+    axs[0,1].legend(loc='upper left')
+    axs[0,1].set_title('Enantiomeric excess - SRR')
+    axs[1,1].plot(theta2, eta2R, label='R', color='blue')
+    axs[1,1].plot(theta2, eta2S, label='S', color='orange')
+    axs[1,1].legend(loc='upper left')
+    axs[1,1].set_title('Recovery - SRR')
+    axs[0,2].plot(theta3, ee3Rr, label='Retentate - R', color='blue')
+    axs[0,2].plot(theta3, ee3Rp, label='Permeate - R', color='blue', linestyle='dashed')
+    axs[0,2].plot(theta3, ee3Sr, label='Retentate - S', color='orange')
+    axs[0,2].plot(theta3, ee3Sp, label='Permeate - S', color='orange', linestyle='dashed')
+    axs[0,2].legend(loc='upper left')
+    axs[0,2].set_title('Enantiomeric excess - 2-stage permeate cascade')
+    axs[1,2].plot(theta3, eta3Rr, label='Retentate - R', color='blue')
+    axs[1,2].plot(theta3, eta3Rp, label='Permeate - R', color='blue', linestyle='dashed')
+    axs[1,2].plot(theta3, eta3Sr, label='Retentate - S', color='orange')
+    axs[1,2].plot(theta3, eta3Sp, label='Permeate - S', color='orange', linestyle='dashed')
+    axs[1,2].legend(loc='upper left')
+    axs[1,2].set_title('Recovery - 2-stage permeate cascade')
 
-    # axs[0,0].set(xlabel='', ylabel='ee (%)')
-    # axs[1,0].set(xlabel='Stage cut (-)', ylabel='Recovery of major product (%)')
-    # axs[0,1].set(xlabel='', ylabel='ee (%)')
-    # axs[1,1].set(xlabel='Stage cut (-)', ylabel='Recovery of major product (%)')
-    # axs[0,2].set(xlabel='', ylabel='ee (%)')
-    # axs[1,2].set(xlabel='Stage cut (-)', ylabel='Recovery of major product (%)')
+    axs[0,0].set(xlabel='', ylabel='ee (%)')
+    axs[1,0].set(xlabel='Stage cut (-)', ylabel='Recovery of major product (%)')
+    axs[0,1].set(xlabel='', ylabel='ee (%)')
+    axs[1,1].set(xlabel='Stage cut (-)', ylabel='Recovery of major product (%)')
+    axs[0,2].set(xlabel='', ylabel='ee (%)')
+    axs[1,2].set(xlabel='Stage cut (-)', ylabel='Recovery of major product (%)')
 
-    # axs[0,0].set_xlim([0, 1])
-    # axs[1,0].set_xlim([0, 1])
-    # axs[0,0].set_ylim([0, 100])
-    # axs[1,0].set_ylim([0, 100])
+    axs[0,0].set_xlim([0, 1])
+    axs[1,0].set_xlim([0, 1])
+    axs[0,0].set_ylim([0, 100])
+    axs[1,0].set_ylim([0, 100])
 
-    # axs[0,1].set_xlim([0, 1])
-    # axs[1,1].set_xlim([0, 1])
-    # axs[0,1].set_ylim([0, 100])
-    # axs[1,1].set_ylim([0, 200])
+    axs[0,1].set_xlim([0, 1])
+    axs[1,1].set_xlim([0, 1])
+    axs[0,1].set_ylim([0, 100])
+    axs[1,1].set_ylim([0, 200])
 
-    # axs[0,2].set_xlim([0, 1])
-    # axs[1,2].set_xlim([0, 1])
-    # axs[0,2].set_ylim([0, 100])
-    # axs[1,2].set_ylim([0, 100])
+    axs[0,2].set_xlim([0, 1])
+    axs[1,2].set_xlim([0, 1])
+    axs[0,2].set_ylim([0, 100])
+    axs[1,2].set_ylim([0, 100])
 
-    # #for ax in axs.flat:
-    # #    ax.label_outer()
+    #for ax in axs.flat:
+    #    ax.label_outer()
 
-    # # export data
-    # # notes and information
-    # # 3 process diagram
-    # # changes in article (based on Gergo's article) Highlights, abstract, methods, res., concl.
+    # export data
+    # notes and information
+    # 3 process diagram
+    # changes in article (based on Gergo's article) Highlights, abstract, methods, res., concl.
 
-    # # export data
+    # export data
     # RES = np.transpose(np.concatenate([[theta2], [ee_Rr[1:]],[ee_Rp[1:]],[ee_Sr[1:]],[ee_Sp[1:]],
     #     [eta_Rr[1:]],[eta_Rp[1:]],[eta_Sr[1:]],[eta_Sp[1:]],[ee2R],[ee2S],[eta2R],[eta2S],[ee3Rr],[ee3Rp],[ee3Sr],[ee3Sp],
     #     [eta3Rr],[eta3Rp],[eta3Sr],[eta3Sp]]))
@@ -223,13 +230,17 @@ def calculate_diagrams(user_r_rejection, user_s_rejection, user_r_racemate):
     #     'srr_ee_R','srr_ee_S','srr_rec_R','srr_rec_S','c01_ee_Rr','c01_ee_Rp','c01_ee_Sr','c01_ee_Sp',
     #     'c01_rec_Rr','c01_rec_Rp','c01_rec_Sr','c01_rec_Sp']
 
-    # # df = pd.DataFrame(RES)
-    # # df.columns = headers
-    # # df.to_csv('./static/results.csv', index=False)
+    # df = pd.DataFrame(RES)
+    # df.columns = headers
+    # df.to_csv('./static/results.csv', index=False)
 
-    # plt.savefig('./static/thetaplot.png', dpi=300)
-    return True
+    #plt.savefig('thetaplot_2.png', dpi=300)
 
 
-if __name__ == "__main__":
-    calculate_diagrams(95, 90, 50)
+    filepath = 'static/theta.png'
+    fig.savefig(filepath)
+    ''' do not change data else the code breaks and I do not know why.'''
+
+
+# if __name__ == "__main__":
+#     calculate_diagrams(95, 90, 50)

@@ -4,12 +4,17 @@ from similarity_calc import DataLoader, Similarity
 import predictor
 from rdkit import Chem
 from rdkit.Chem import Draw
-from thetaplots import calculate_diagrams
+from thetaplots import calculate_values, plotting
 import io
 import random
 from flask import Response
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
+import webbrowser
+
+from base64 import b64encode
+from io import BytesIO
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
 app = Flask(__name__)
 
@@ -106,59 +111,24 @@ def what_is_osn():
         return render_template('what_is_osn.html')
     return render_template('what_is_osn.html')
 
+@app.route('/plot', methods=['GET', 'POST'])
+def plot():
+    pass
 
 @app.route('/enantiomer_separation', methods=['GET', 'POST'])
-def plot_png():
-    fig = create_figure()
-    output = io.BytesIO()
-    FigureCanvas(fig).print_png(output)
-    return Response(output.getvalue(), mimetype='static/png')
-
-def create_figure():
-    fig = Figure()
-    axis = fig.add_subplot(1, 1, 1)
-    xs = range(100)
-    ys = [random.randint(1, 50) for x in xs]
-    axis.plot(xs, ys)
-    return fig
-
 def enantiomer_separation():
     if request.method == 'POST':
         user_r_rejection = request.form['r_rejection']
         user_s_rejection = request.form['s_rejection']
         user_r_racemate = request.form['racemate']
-        try:
-            state = calculate_diagrams(user_r_rejection, user_s_rejection, user_r_racemate)
-        except:
-            state = False
+        #try:
+        theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, eta_Sr, eta_Sp, ee2R, ee2S, eta2R, eta2S, ee3Rr, ee3Rp, ee3Sr, ee3Sp, eta3Rr, eta3Rp, eta3Sr, eta3Sp = calculate_values(user_r_rejection, user_s_rejection, user_r_racemate)
+        plotting(theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, eta_Sr, eta_Sp, ee2R, ee2S, eta2R, eta2S, ee3Rr, ee3Rp, ee3Sr, ee3Sp, eta3Rr, eta3Rp, eta3Sr, eta3Sp)
         retrieved_features = [user_r_rejection,
                                 user_s_rejection,
-                                user_r_racemate]
-
+                                    user_r_racemate]
         return render_template('enantiomer_separation.html', tasks=retrieved_features)
     return render_template('enantiomer_separation.html')
-
-
-# def pls_prediction():
-#     if request.method == 'POST':
-#         user_smiles = request.form['content']
-#         #comparing_dataset = DataLoader.csv_loader('data/osn_data_similarity.csv')
-#         try:
-#         #    similar = Similarity.rejection_similarity(comparing_dataset, reference=user_smiles)
-#             user_descr = predictor.descripter(user_smiles)
-#             prediction = predictor.predictor(user_descr)
-#         except:
-#             return 'Wrong SMILES, please try again. Currently, molecules with more than 5 heavy atoms work only.'
-
-#         Draw.MolToFile(Chem.MolFromSmiles(user_smiles),'static/dataset_image.png') 
-#         retrieved_features = [user_smiles, 
-#                                 round(prediction[0][0], 3)*100]
-#         try:
-#             return render_template("pls-prediction.html", tasks = retrieved_features)
-#         except:
-#             return 'There was an error adding your task'
-#     if request.method == "GET":
-#         return render_template("pls-prediction.html")
 
 
 if __name__ == "__main__":
