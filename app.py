@@ -131,8 +131,8 @@ def what_is_osn():
 def plot():
     pass
 
-@app.route('/enantiomer_separation', methods=['GET', 'POST'])
-def enantiomer_separation():
+@app.route('/enantioseparation', methods=['GET', 'POST'])
+def enantioseparation():
     if request.method == 'POST':
         user_r_rejection = request.form['r_rejection']
         user_s_rejection = request.form['s_rejection']
@@ -160,9 +160,9 @@ def enantiomer_separation():
         retrieved_features = [user_r_rejection,
                                 user_s_rejection,
                                     user_r_racemate, output]
-        return render_template('enantiomer_separation.html', tasks=retrieved_features)
+        return render_template('enantioseparation.html', tasks=retrieved_features)
     if request.method == 'GET':
-        return render_template('enantiomer_separation.html')
+        return render_template('enantioseparation.html')
 
 
 if __name__ == "__main__":
