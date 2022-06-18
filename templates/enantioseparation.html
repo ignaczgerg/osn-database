@@ -33,7 +33,7 @@ Enantioseparation
         <li>Single stage nanofiltration with retentate stream racemization and recycling (SRR). Calculations assume 99% racemization in the reactor.</li>
         <li>Two-stage permeate cascade with recycling (where the volumetric flow of the permeate stream of the first stage is equal to the feed flow). In this case the stage cut is defined for the overall process.</li></ul>
         <p class="card-text" style="font-size:130%">
-        To calculate an analysis, please enter the rejection values of the two enantiomers and the ratio of the R solute in the feed stream (50% for racemate feed).
+        To calculate an analysis, please enter the rejection values of the two enantiomers and the ratio of the R solute in the feed stream (50% is set as default for racemic feed).
         The process schemes for the different configurations can be found below. For more details, please visit the corresponding article at DOI: (to be submitted). Please use the article as a reference when using the performance prediction tool. Thank you!
         </p>
         <div class="text-center">
@@ -56,7 +56,7 @@ Enantioseparation
                     <form style="text-align: center" action="/enantioseparation" method="POST">
                         <input type="text" name="r_rejection" id="r_rejection" placeholder='Rejection of R in %'>
                         <input type="text" name="s_rejection" id="s_rejection" placeholder='Rejection of S in %'>
-                        <input type="text" name="racemate" id="racemate" placeholder='R product ratio in %'>
+                        <input type="text" name="racemate" id="racemate" placeholder='R product ratio in %' value="50">
                         <br></br>
                         <input type="submit" value="Predict">
                     </form>
