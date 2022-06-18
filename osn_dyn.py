@@ -61,6 +61,7 @@ def SRRZ_ODE(X,t,R,c0,V_loop,F0,lam,z):
     return dy_dt
 
 def Cnm_ODE(X,t,R0,Rr,Rp,c0,V_loop,n,m,F0,Fr0,Fp0,Frir,Frip,Fpir,Fpip):
+    #print(str(n)+str(m))
     cr0 = X[0]
     cp0 = X[1]
     if n > 0:

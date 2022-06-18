@@ -1,12 +1,9 @@
-# import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import process as pro
 import base64
 from io import BytesIO
 from matplotlib.figure import Figure
-import mpld3
-
 
 def calculate_values(user_r_rejection, user_s_rejection, user_r_racemate):
     P = 4e-6; 
@@ -89,6 +86,7 @@ def calculate_values(user_r_rejection, user_s_rejection, user_r_racemate):
 
     cel = pro.cell(P)
     system = pro.sys(cel,True)
+    system.per_cells.clear()
     system.ractype = 'srrz'
     system.z = z
 
@@ -99,22 +97,26 @@ def calculate_values(user_r_rejection, user_s_rejection, user_r_racemate):
     eta2S = np.array([float(0)]*99)
 
     j = 0
-    for i in theta2:
-        # system.set_flow(F0,alfa)
-        system.set_flow_cut(F0,i)
-        system.initial_cell.R = R
-        system.initial_cell.c0 = c0
-        system.initial_cell.V_loop = V_loop
-        system.run_sys(tspan)
-        ee2S[j] = 100*((system.res[-1,1]-system.res[-1,0])/(system.res[-1,0]+system.res[-1,1]))
-        ee2R[j] = -ee2S[j]
-        eta2S[j] = 100*(system.res[-1,1]*system.initial_cell.Fp/(F0*c0[1]))
-        eta2R[j] = 100*(system.res[-1,0]*system.initial_cell.Fp/(F0*c0[1]))
-        j += 1
+    try:
+        for i in theta2:
+            # system.set_flow(F0,alfa)
+            system.set_flow_cut(F0,i)
+            system.initial_cell.R = R
+            system.initial_cell.c0 = c0
+            system.initial_cell.V_loop = V_loop
+            system.run_sys(tspan)
+            ee2S[j] = 100*((system.res[-1,1]-system.res[-1,0])/(system.res[-1,0]+system.res[-1,1]))
+            ee2R[j] = -ee2S[j]
+            eta2S[j] = 100*(system.res[-1,1]*system.initial_cell.Fp/(F0*c0[1]))
+            eta2R[j] = 100*(system.res[-1,0]*system.initial_cell.Fp/(F0*c0[1]))
+            j += 1
+    except IndexError:
+        print('INDEX_ERROR SRR')
 
     initial_cel = pro.cell(P)
     system_cas = pro.sys(initial_cel,False)
     per_cel = pro.cell(P)
+    system_cas.per_cells.clear()
     system_cas.per_cells.append(per_cel)
 
     system_cas.initial_cell.R = R
@@ -132,26 +134,29 @@ def calculate_values(user_r_rejection, user_s_rejection, user_r_racemate):
     eta3Sp = np.array([float(0)]*99)
 
     k = 0
-    for i in theta3:
-        system_cas.initial_cell.F0 = F0
-        system_cas.initial_cell.Fp = F0
-        system_cas.initial_cell.Fr = F0*(1-i)
+    try:
+        for i in theta3:
+            system_cas.initial_cell.F0 = F0
+            system_cas.initial_cell.Fp = F0
+            system_cas.initial_cell.Fr = F0*(1-i)
 
-        system_cas.per_cells[0].Fp = F0*i
-        system_cas.per_cells[0].Fr = F0*(1-i)
-        system_cas.per_cells[0].R = R
-        system_cas.run_sys(tspan)
+            system_cas.per_cells[0].Fp = F0*i
+            system_cas.per_cells[0].Fr = F0*(1-i)
+            system_cas.per_cells[0].R = R
+            system_cas.run_sys(tspan)
 
-        ee3Rr[k] = 100*((system_cas.res[-1,0]-system_cas.res[-1,4])/(system_cas.res[-1,0]+system_cas.res[-1,4]))
-        ee3Sr[k] = -ee3Rr[k]
-        ee3Sp[k] = 100*((system_cas.res[-1,7]-system_cas.res[-1,3])/(system_cas.res[-1,7]+system_cas.res[-1,3]))
-        ee3Rp[k] = -ee3Sp[k]
+            ee3Rr[k] = 100*((system_cas.res[-1,0]-system_cas.res[-1,4])/(system_cas.res[-1,0]+system_cas.res[-1,4]))
+            ee3Sr[k] = -ee3Rr[k]
+            ee3Sp[k] = 100*((system_cas.res[-1,7]-system_cas.res[-1,3])/(system_cas.res[-1,7]+system_cas.res[-1,3]))
+            ee3Rp[k] = -ee3Sp[k]
 
-        eta3Sp[k] = 100*(system_cas.res[-1,7]*system_cas.per_cells[0].Fp/(F0*c0[1]))
-        eta3Sr[k] = 100-eta3Sp[k]
-        eta3Rr[k] = 100*(system_cas.res[-1,0]*system_cas.initial_cell.Fr/(F0*c0[0]))
-        eta3Rp[k] = 100-eta3Rr[k]
-        k+=1
+            eta3Sp[k] = 100*(system_cas.res[-1,7]*system_cas.per_cells[0].Fp/(F0*c0[1]))
+            eta3Sr[k] = 100-eta3Sp[k]
+            eta3Rr[k] = 100*(system_cas.res[-1,0]*system_cas.initial_cell.Fr/(F0*c0[0]))
+            eta3Rp[k] = 100-eta3Rr[k]
+            k+=1
+    except IndexError:
+        print('INDEX_ERROR CAS')
 
     return theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, eta_Sr, eta_Sp, ee2R, ee2S, eta2R, eta2S, ee3Rr, ee3Rp, ee3Sr, ee3Sp, eta3Rr, eta3Rp, eta3Sr, eta3Sp
 
@@ -163,7 +168,7 @@ def plotting(theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, 
     axs[0,0].plot(theta, ee_Sr, label='Retentate - S', color='orange')
     axs[0,0].plot(theta, ee_Sp, label='Permeate - S', color='orange', linestyle='dashed')
     axs[0,0].legend(loc='upper left')
-    axs[0,0].set_title('Enantiomeric excess - single stage')
+    axs[0,0].set_title('ee - single stage')
     axs[1,0].plot(theta, eta_Rr, label='Retentate - R', color='blue')
     axs[1,0].plot(theta, eta_Rp, label='Permeate - R', color='blue', linestyle='dashed')
     axs[1,0].plot(theta, eta_Sr, label='Retentate - S', color='orange')
@@ -173,7 +178,7 @@ def plotting(theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, 
     axs[0,1].plot(theta2, ee2R, label='R', color='blue')
     axs[0,1].plot(theta2, ee2S, label='S', color='orange')
     axs[0,1].legend(loc='upper left')
-    axs[0,1].set_title('Enantiomeric excess - SRR')
+    axs[0,1].set_title('ee - SRR')
     axs[1,1].plot(theta2, eta2R, label='R', color='blue')
     axs[1,1].plot(theta2, eta2S, label='S', color='orange')
     axs[1,1].legend(loc='upper left')
@@ -183,20 +188,20 @@ def plotting(theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, 
     axs[0,2].plot(theta3, ee3Sr, label='Retentate - S', color='orange')
     axs[0,2].plot(theta3, ee3Sp, label='Permeate - S', color='orange', linestyle='dashed')
     axs[0,2].legend(loc='upper left')
-    axs[0,2].set_title('Enantiomeric excess - 2-stage permeate cascade')
+    axs[0,2].set_title('ee - permeate cascade')
     axs[1,2].plot(theta3, eta3Rr, label='Retentate - R', color='blue')
     axs[1,2].plot(theta3, eta3Rp, label='Permeate - R', color='blue', linestyle='dashed')
     axs[1,2].plot(theta3, eta3Sr, label='Retentate - S', color='orange')
     axs[1,2].plot(theta3, eta3Sp, label='Permeate - S', color='orange', linestyle='dashed')
     axs[1,2].legend(loc='upper left')
-    axs[1,2].set_title('Recovery - 2-stage permeate cascade')
+    axs[1,2].set_title('Recovery - permeate cascade')
 
     axs[0,0].set(xlabel='', ylabel='ee (%)')
-    axs[1,0].set(xlabel='Stage cut (-)', ylabel='Recovery of major product (%)')
+    axs[1,0].set(xlabel='Stage cut (-)', ylabel='Recovery (%)')
     axs[0,1].set(xlabel='', ylabel='ee (%)')
-    axs[1,1].set(xlabel='Stage cut (-)', ylabel='Recovery of major product (%)')
+    axs[1,1].set(xlabel='Stage cut (-)', ylabel='Recovery (%)')
     axs[0,2].set(xlabel='', ylabel='ee (%)')
-    axs[1,2].set(xlabel='Stage cut (-)', ylabel='Recovery of major product (%)')
+    axs[1,2].set(xlabel='Stage cut (-)', ylabel='Recovery (%)')
 
     axs[0,0].set_xlim([0, 1])
     axs[1,0].set_xlim([0, 1])
@@ -236,9 +241,13 @@ def plotting(theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, 
 
     #plt.savefig('thetaplot_2.png', dpi=300)
 
-
+    
     filepath = 'static/theta.png'
-    fig.savefig(filepath)
+    fig.savefig(filepath, dpi=500)
+
+    # buf = BytesIO()
+    # fig.savefig(buf, format='png')
+    # data = base64.b64encode(buf.getbuffer()).decode("ascii")
     ''' do not change data else the code breaks and I do not know why.'''
 
 

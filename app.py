@@ -14,9 +14,25 @@ import webbrowser
 
 from base64 import b64encode
 from io import BytesIO
-from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+import os
 
+# tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')
+# stat_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+
+# app = Flask(__name__, template_folder=tmpl_dir, static_folder=stat_dir)
 app = Flask(__name__)
+
+@app.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -121,14 +137,32 @@ def enantiomer_separation():
         user_r_rejection = request.form['r_rejection']
         user_s_rejection = request.form['s_rejection']
         user_r_racemate = request.form['racemate']
-        #try:
-        theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, eta_Sr, eta_Sp, ee2R, ee2S, eta2R, eta2S, ee3Rr, ee3Rp, ee3Sr, ee3Sp, eta3Rr, eta3Rp, eta3Sr, eta3Sp = calculate_values(user_r_rejection, user_s_rejection, user_r_racemate)
-        plotting(theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, eta_Sr, eta_Sp, ee2R, ee2S, eta2R, eta2S, ee3Rr, ee3Rp, ee3Sr, ee3Sp, eta3Rr, eta3Rp, eta3Sr, eta3Sp)
+
+        output = ""
+
+        try:
+            R1 = float(user_r_rejection)/100
+            R2 = float(user_s_rejection)/100
+            ratio = float(user_r_racemate)/100
+
+            if R1 > 1 or R2 > 1:
+                output = "Invalid input. Please enter rejection values equal to or lower than 100%"
+
+            if ratio >= 1 or ratio <= 0:
+                output = "Invalid input. Please enter a ratio value between 0 and 100% (excluding 0 and 100%)"
+            
+        except ValueError:
+            output = "Invalid input. Please enter numerical values"
+
+        if output == "":
+            theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, eta_Sr, eta_Sp, ee2R, ee2S, eta2R, eta2S, ee3Rr, ee3Rp, ee3Sr, ee3Sp, eta3Rr, eta3Rp, eta3Sr, eta3Sp = calculate_values(user_r_rejection, user_s_rejection, user_r_racemate)
+            plotting(theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, eta_Sr, eta_Sp, ee2R, ee2S, eta2R, eta2S, ee3Rr, ee3Rp, ee3Sr, ee3Sp, eta3Rr, eta3Rp, eta3Sr, eta3Sp)
         retrieved_features = [user_r_rejection,
                                 user_s_rejection,
-                                    user_r_racemate]
+                                    user_r_racemate, output]
         return render_template('enantiomer_separation.html', tasks=retrieved_features)
-    return render_template('enantiomer_separation.html')
+    if request.method == 'GET':
+        return render_template('enantiomer_separation.html')
 
 
 if __name__ == "__main__":
