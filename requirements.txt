@@ -1,9 +1,9 @@
-pandas
-numpy
-conda
+pandas==1.2.5
+numpy==1.21.0
 rdkit-pypi
 gunicorn
-Flask
+Flask==2.0.1
 Jinja2
-mordred
-scikit-learn
+mordred==1.2.0
+scikit-learn==0.24.2
+matplotlib==3.5.1
