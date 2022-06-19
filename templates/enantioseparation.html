@@ -17,12 +17,12 @@ Enantioseparation
         Demonstrative page for the application of dynamic models in predicting enantioselective organic solvent nanofiltration performance.
         Our model predicts the enantiomeric excess and recovery in the product stream(s) as a function of stage cut. 
         The enantiomer excess and the recovery of the solutes only depend on the stage cut, the rejection of the two enantiomers and the ratio of their concentration in the feed. 
-        Stage cut is defined as the ratio of the permeate and total output volumetric flow, while rejection is expressed with the concentration of the solute in the permeate and retentate:</p>
+        Stage cut (θ) is defined as the ratio of the permeate and total output volumetric flow, while rejection is expressed with the concentration of the solute in the permeate and retentate:</p>
         <div class="text-center">
         <p><img class="rounded" src="/static/theta_rej.png" alt="Card image cap" height="46" ></p>
         </div>
         <p class="card-text" style="font-size:130%">
-        Enantiomeric excess is used to describe the chiral purity of a solution with the concentration of the enantiomers R and S, while recovery describes the percentage of the target solute mass flow recovered from the feed solution.</p>
+        Enantiomeric excess (ee) is used to describe the chiral purity of a solution with the concentration of the enantiomers R and S, while recovery (η) describes the percentage of the target solute mass flow recovered from the feed solution.</p>
         <div class="text-center">
         <p><img class="rounded" src="/static/ee_eta.png" alt="Card image cap" height="40" ></p>
         </div>
@@ -33,39 +33,84 @@ Enantioseparation
         <li>Single stage nanofiltration with retentate stream racemization and recycling (SRR). Calculations assume 99% racemization in the reactor.</li>
         <li>Two-stage permeate cascade with recycling (where the volumetric flow of the permeate stream of the first stage is equal to the feed flow). In this case the stage cut is defined for the overall process.</li></ul>
         <p class="card-text" style="font-size:130%">
-        To calculate an analysis, please enter the rejection values of the two enantiomers and the ratio of the R solute in the feed stream (50% is set as default for racemic feed).
+        To calculate an analysis, please enter the rejection values of the two enantiomers and the ratio of the R solute in the feed stream (50% for racemic feed).
         The process schemes for the different configurations can be found below. For more details, please visit the corresponding article at DOI: (not published yet). Please use the article as a reference when using the performance prediction tool. Thank you!
         </p>
-        <div class="text-center">
+        <!-- <div class="text-center">
         <p><img class="rounded" src="/static/config.png" alt="Card image cap" width="1300" ></p>
-        </div>
+        </div> -->
         
             <div class="content">
+                <div class="row align-items-md-stretch">
+                    <div class="col">
+                        <div class="h-100 p-5 bg-light border rounded-3">
+                            <div class="text-center"><h6>Process 1: <b>Single stage</b></h6></div>
+                            <p></p>
+                            <p><img class="rounded" src="/static/ss_pad.png" alt="Card image cap" width="100%"></p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="h-100 p-5 bg-light border rounded-3">
+                            <div class="text-center"><h6>Process 2: <b>SRR</b></h6></div>
+                            <p></p>
+                            <div class="text-center"><p><img class="rounded" src="/static/srr_pad.png" alt="Card image cap" width = 100%></p></div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="h-100 p-5 bg-light border rounded-3">
+                            <div class="text-center"><h6>Process 3: <b>Permeate cascade</b></h6></div>
+                            <p></p>
+                            <div class="text-center"><p><img class="rounded" src="/static/c01_pad.png" alt="Card image cap" width = 100%></p></div>
+                        </div>
+                    </div>
+                </div>
+
+                <p></p>
                 {% if tasks|length < 1 %}
                 <p style="text-align: center">Please enter the values below!</p>
+                <div class="text-center"><p style="color:dimgray">For racemic feed: 50% R product ratio</p></div>
                 {% else %}
                 <div class="text-center">
-                <p><b> {{ tasks[3] }} </b></p>
+                <p style="color:firebrick"><b> {{ tasks[3] }} </b></p>
                 {% if tasks[3] == "" %}
-                <p> <img src="{{url_for('static', filename='theta.png')}}" alt="most" height="500" width="1000" class="rounded">  </p>
+                <p> <img src="{{url_for('static', filename='theta.png')}}" alt="most" height="500" width="950" class="rounded">  </p>
+                <p><b>Current values: R rejection {{ tasks[0] }}%, S rejection {{ tasks[1] }}%, R product ratio {{ tasks[2] }}%</b></p> 
                 {% endif %}
                 </div>
                 {% endif %}
-            
-                <div class="form">
-                    <form style="text-align: center" action="/enantioseparation" method="POST">
-                        <input type="text" name="r_rejection" id="r_rejection" placeholder='Rejection of R in %'>
-                        <input type="text" name="s_rejection" id="s_rejection" placeholder='Rejection of S in %'>
-                        <input type="text" name="racemate" id="racemate" placeholder='R product ratio in %' value="50">
-                        <br></br>
-                        <input type="submit" value="Predict">
-                    </form>
+                <div class="collapse" id = "spinnycol">
+                <div class="text-center" id="spinny">
+                <div class="spinner-border text-info" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                </div>
                 </div>
                 <p></p>
+                <div class="form">
+                    <form style="text-align: center" action="/enantioseparation#bottom" method="POST" id="myform">
+                        <input type="text" name="r_rejection" id="r_rejection" placeholder='Rejection of R in %'>
+                        <input type="text" name="s_rejection" id="s_rejection" placeholder='Rejection of S in %'>
+                        <input type="text" name="racemate" id="racemate" placeholder='R product ratio in %'>
+                        <br></br>
+                        <input type="submit" value="Predict" data-toggle="collapse" data-target="#spinnycol">
+                    </form>
+                    <!--script to disable the submit button -->
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">  
+                    </script>
+                    <script type="text/javascript">
+
+                    $('#myform').one('submit', function() {
+                        $(this).find('input[type="submit"]').attr('disabled', 'disabled');
+                    });
+
+                    </script>
+                    <!--script ends here-->
+                </div>
                 <p>
 
                 </p>
             </div>
+            <a name="bottom"></a>
         
             <!-- <div class="form">
                 <form style="text-align: center">

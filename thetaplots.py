@@ -174,7 +174,7 @@ def plotting(theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, 
     axs[1,0].plot(theta, eta_Sr, label='Retentate - S', color='orange')
     axs[1,0].plot(theta, eta_Sp, label='Permeate - S', color='orange', linestyle='dashed')
     axs[1,0].legend(loc='upper left')
-    axs[1,0].set_title('Recovery - single stage')
+    axs[1,0].set_title('Recovery (η) - single stage')
     axs[0,1].plot(theta2, ee2R, label='R', color='blue')
     axs[0,1].plot(theta2, ee2S, label='S', color='orange')
     axs[0,1].legend(loc='upper left')
@@ -182,7 +182,7 @@ def plotting(theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, 
     axs[1,1].plot(theta2, eta2R, label='R', color='blue')
     axs[1,1].plot(theta2, eta2S, label='S', color='orange')
     axs[1,1].legend(loc='upper left')
-    axs[1,1].set_title('Recovery - SRR')
+    axs[1,1].set_title('Recovery (η) - SRR')
     axs[0,2].plot(theta3, ee3Rr, label='Retentate - R', color='blue')
     axs[0,2].plot(theta3, ee3Rp, label='Permeate - R', color='blue', linestyle='dashed')
     axs[0,2].plot(theta3, ee3Sr, label='Retentate - S', color='orange')
@@ -194,14 +194,14 @@ def plotting(theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, 
     axs[1,2].plot(theta3, eta3Sr, label='Retentate - S', color='orange')
     axs[1,2].plot(theta3, eta3Sp, label='Permeate - S', color='orange', linestyle='dashed')
     axs[1,2].legend(loc='upper left')
-    axs[1,2].set_title('Recovery - permeate cascade')
+    axs[1,2].set_title('Recovery (η) - permeate cascade')
 
     axs[0,0].set(xlabel='', ylabel='ee (%)')
-    axs[1,0].set(xlabel='Stage cut (-)', ylabel='Recovery (%)')
+    axs[1,0].set(xlabel='θ (-)', ylabel='η (%)')
     axs[0,1].set(xlabel='', ylabel='ee (%)')
-    axs[1,1].set(xlabel='Stage cut (-)', ylabel='Recovery (%)')
+    axs[1,1].set(xlabel='θ (-)', ylabel='η (%)')
     axs[0,2].set(xlabel='', ylabel='ee (%)')
-    axs[1,2].set(xlabel='Stage cut (-)', ylabel='Recovery (%)')
+    axs[1,2].set(xlabel='θ (-)', ylabel='η (%)')
 
     axs[0,0].set_xlim([0, 1])
     axs[1,0].set_xlim([0, 1])
@@ -243,7 +243,7 @@ def plotting(theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, 
 
     
     filepath = 'static/theta.png'
-    fig.savefig(filepath, dpi=500)
+    fig.savefig(filepath, dpi=600)
 
     # buf = BytesIO()
     # fig.savefig(buf, format='png')
