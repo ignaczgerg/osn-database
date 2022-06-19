@@ -25,22 +25,11 @@ OSN Database
  
     <div class="col-md-10">
       <div class="h-100 p-5 text-black rounded-6">
-        <h2>Organic Solvent Nanofiltration (OSN) Database</h2>
+        <h2>Organic Solvent Nanofiltration Database</h2>
         <p style="font-size:160%">  
           OSN Database is the first repository for organic solvent membrane separation data. 
-          The database contains process parameters (temperature, pressure), flux data 
-          and rejection values of different membranes, solvents and small molecules.
-          The dataset is available under the Creative Commons Attribution 4.0 International license (CC-BY).
           <br></br>
-          The original data was first released in 2021 within the article titled 
-          "Diversity matters: widening the chemical space in organic solvent nanofiltration." 
-          The dataset continuously grows as more and more small chemicals are being measured and added to the dataset. 
-          Under the latest release, the data contains more than 400 entries.
-          <br></br>
-          Currently, the dataset only contains measurements performed in methanol as solvent 
-                  using polyimide Duramem membranes with different molecular weight cut-offs.
-          <br></br>
-          Our aim is to provide high quality data to the membrane community which can be used in advanced modelling tools.
+          Our aim is to provide high quality data and tools to the membrane community.
          <!-- <a class="btn btn-outline-dark" type="button" href="https://www.sciencedirect.com/science/article/pii/S0376738821008723?dgcid=raven_sd_aip_email">View at Publisher</a> -->
       </div>
     </div>
@@ -48,33 +37,7 @@ OSN Database
 
 <div class="container">
   <div class="row">
-  </div>  
-  <div class="row">
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="/static/literature_database.png" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">OSN literature database</h5>
-            <p class="card-text">Here, you can find and download the currently largest literature based database dedicated to OSN. 
-              The database was originally used for performance prediction by Hu et al.
-            </p>
-            <a href="/literature_database" class="btn btn-primary">Literature database</a>
-          </div>
-        </div>
-        
-      </div>
-      <div class="col">
-        <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="/static/similarity-1.png" alt="Card image cap">
-            <div class="card-body">
-              <h5 class="card-title">Similarity search</h5>
-              <p class="card-text">Here you can search the OSN Database to similar molecules of your own. 
-                The displayed rejection is a value from from the database.</p>
-              <a href="/similarity" class="btn btn-primary">Go to similarity search</a>
-            </div>
-          </div>
-      </div>
-      <div class="col">
+      <div class="card-deck">
         <div class="card" style="width: 18rem;">
             <img class="card-img-top" src="/static/prediction-1.png" alt="Card image cap">
             <div class="card-body">
@@ -82,25 +45,37 @@ OSN Database
               <p class="card-text">Here, you can predict the rejection of any compounds in methanol. The model currently works for DuraMem 150.</p>
               <a href="/pls-prediction" class="btn btn-primary">Go to prediction</a>
             </div>
-          </div>
-        </div>
-      <div class="col">
+      </div>
         <div class="card" style="width: 18rem;">
             <img class="card-img-top" src="/static/enan_sel.jpeg" alt="Card image cap">
             <div class="card-body">
+              <p><br><br><br></p>
               <h5 class="card-title">Enantioseparation</h5>
               <p class="card-text">Here, you can use our process modeling tools to predict the performance of a hypothetical enantioselective OSN process with a chiral membrane.</p>
               <a href="/enantioseparation" class="btn btn-primary">Go to prediction</a>
             </div>
           </div>
-        </div>
-            
-
-    </div>
-    <div class="col-sm">        
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="/static/similarity-1.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">Similarity search</h5>
+              <p class="card-text">Here, you can search the OSN Database to similar molecules of your own. 
+                The displayed rejection is a value from from the database.</p>
+              <a href="/similarity" class="btn btn-primary">Go to similarity search</a>
+          </div>
+      </div>
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="/static/literature_database.png" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">OSN literature database</h5>
+              <p class="card-text">Here, you can find and download the currently largest literature based database dedicated to OSN. 
+                The database was originally used for performance prediction by Hu et al.
+              </p>
+              <a href="/literature_database" class="btn btn-primary">Literature database</a>
+          </div>
+      </div>
     </div>
   </div>
-</div>
 
 
 
