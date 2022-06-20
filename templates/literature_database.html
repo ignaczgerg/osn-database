@@ -6,41 +6,39 @@ Contact information
 {% block body %}
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Hugo 0.88.1">
-    <title>Album example · Bootstrap v5.1</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+  <meta name="generator" content="Hugo 0.88.1">
+  <title>Album example · Bootstrap v5.1</title>
 
-    
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/">
+  <!-- Bootstrap core CSS -->
+  <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Bootstrap core CSS -->
-<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
       }
+    }
+  </style>
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
+</head>
 
-    
-  </head>
-  <body>
-<!--     
+<body>
+  <!--     
 <header>
   <div class="collapse bg-dark" id="navbarHeader">
     <div class="container">
@@ -73,207 +71,49 @@ Contact information
   </div>
 </header> -->
 
-<main>
-  <section class="py-5 text-center container">
-    <div class="row py-lg-3">
-      <div class="col-lg-12 col-md-8 mx-auto">
-        
-        <h1 class="fw-light">Literature OSN Database</h1>
-        <p class="lead text-muted">This dataset was constructed to establish predictive models for membrane performance 
-          that can fast-track and facilitate the industrial applications of organic solvent nanofiltration (OSN). 
-          As OSN performance is difficult to understand and predict due to its complex multi-dimensional relationship, 
-          we aim to perform data-driven prediction using a large set of well constructured experimental data. </p>
-
-          <p class="lead text-muted">The whole dataset consists of 42,290 datapoints with 4,229 rows and 10 columns 
-            compiled from 78 articles from 2002 onwards. Only commercial OSN membranes were considered. 
-            We included 10 parameters: the type of membranes, concentration of solute, MWCO of solute, testing solvent, 
+  <main>
+    <section class="py-5 text-center container">
+      <div class="row py-lg-3">
+        <div class="col-lg-12 col-md-8 mx-auto">
+          <h1 class="fw-light">Literature OSN Database</h1>
+          <p class="lead text-muted">This dataset was constructed to establish predictive models for membrane
+            performance
+            that can fast-track and facilitate the industrial applications of organic solvent nanofiltration (OSN).
+            As OSN performance is difficult to understand and predict due to its complex multi-dimensional relationship,
+            we aim to perform data-driven prediction using a large set of well constructured experimental data. </p>
+          <p class="lead text-muted">The whole dataset consists of 42,290 datapoints with 4,229 rows and 10 columns
+            compiled from 78 articles from 2002 onwards. Only commercial OSN membranes were considered.
+            We included 10 parameters: the type of membranes, concentration of solute, MWCO of solute, testing solvent,
             transmembrane pressure, flux, permeance, rejection, operating temperature and process configuration.</p>
-
           <p>
-            <img class="pls_model_image" src="/static/conventional_vs_ai.jpeg" alt="Card image cap" width="738" height="407">
-
+            <img class="pls_model_image" src="/static/conventional_vs_ai.jpeg" alt="Card image cap" width="738"
+              height="407">
           </p>
-
-          <p class="lead text-muted">In the published machine learning project, we first performed dimension reduction analysis 
-            using statistical PCA tool to better extract the underlying trends. Then, we applied three different algorithms: 
-            artificial neural network (ANN), support vector (SVM), and random forest (RF). 
-            The trained AI model showed up to 90% (RMSE: 1.133 for ANN and 0.905 for SVM; R2: 0.900 for ANN and 0.914 for SVM) 
-            and 91% (RMSE: 12.138 for ANN and 13.234 for SVM; R2: 0.914 for ANN and 0.906 for SVM) 
-            prediction accuracy for permeance and rejection, respectively.  </p>
-
+          <p class="lead text-muted">In the published machine learning project, we first performed dimension reduction
+            analysis
+            using statistical PCA tool to better extract the underlying trends. Then, we applied three different
+            algorithms:
+            artificial neural network (ANN), support vector (SVM), and random forest (RF).
+            The trained AI model showed up to 90% (RMSE: 1.133 for ANN and 0.905 for SVM; R2: 0.900 for ANN and 0.914
+            for SVM)
+            and 91% (RMSE: 12.138 for ANN and 13.234 for SVM; R2: 0.914 for ANN and 0.906 for SVM)
+            prediction accuracy for permeance and rejection, respectively. </p>
           <p class="lead text-muted">
-            The original article titled Artificial intelligence for performance 
+            The original article titled Artificial intelligence for performance
             prediction of organic solvent nanofiltration membranes was written by
             Jiahui Hu, Changsu Kim, Peter Halasz, Jeong F. Kim, Jiyong Kim and Gyorgy Szekely.
           </p>
-        <p>
-          <a href="https://github.com/ignaczgerg/osn-database/raw/main/data/Literature_OSN_database.xlsx" class="btn btn-primary my-2">Download the dataset</a>
-          <a href="https://www.sciencedirect.com/science/article/pii/S0376738820310905?casa_token=MNc56J85ErEAAAAA:c7URnVC3k7sXOEzNXp3wcpaBsHK9YzvSp-LZh15K1tHo_5M4NoXkZaiNy-nJoXxDblwQJir4uxU#undfig1" class="btn btn-secondary my-2">Original publication</a>
-        </p>
-      </div>
-    </div>
-  </section>
-<!-- 
-  <div class="album py-5 bg-light">
-    <div class="container">
-
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card shadow-sm">
-            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-
-            <div class="card-body">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                </div>
-                <small class="text-muted">9 mins</small>
-              </div>
-            </div>
-          </div>
+          <p>
+            <a href="https://github.com/ignaczgerg/osn-database/raw/main/data/Literature_OSN_database.xlsx"
+              class="btn btn-primary my-2">Download the dataset</a>
+            <a href="https://www.sciencedirect.com/science/article/pii/S0376738820310905?casa_token=MNc56J85ErEAAAAA:c7URnVC3k7sXOEzNXp3wcpaBsHK9YzvSp-LZh15K1tHo_5M4NoXkZaiNy-nJoXxDblwQJir4uxU#undfig1"
+              class="btn btn-secondary my-2">Original publication</a>
+          </p>
         </div>
       </div>
-    </div>
-  </div> -->
-
-</main>
-
-
-    <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
-
-      
-  </body>
+    </section>
+  </main>
+  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
 {% endblock %}
