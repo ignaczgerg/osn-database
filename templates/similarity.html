@@ -4,21 +4,18 @@ Similarity search
 {% endblock %}
 {% block body %}
 
-
 <div class="card">
     <div class="card-header">
-      Similarity search
+        Similarity search
     </div>
     <div class="card-body">
-      <h5 class="card-title">SMILES-based similarity-search to compare solute rejection in OSN</h5>
-      <p class="card-text">To use the similarity based rejection search use the SMILES of a molecule. 
-        SMILES (simplified molecular-input line-entry system) is the string-based representation of a 
-        molecule. For example, the SMILES of n-butanol is CCCO. The model currently works only in methanol.</p>
-
+        <h5 class="card-title">SMILES-based similarity-search to compare solute rejection in OSN</h5>
+        <p class="card-text">To use the similarity based rejection search use the SMILES of a molecule.
+            SMILES (simplified molecular-input line-entry system) is the string-based representation of a
+            molecule. For example, the SMILES of n-butanol is CCCO. The model currently works only in methanol.</p>
 
         <div class="content">
-            {% if tasks|length < 1 %}
-            <p style="text-align: center">Please enter your SMILES below!</p>
+            {% if tasks|length < 1 %} <p style="text-align: center">Please enter your SMILES below!</p>
             {% else %}
 
             <table class="table">
@@ -38,25 +35,26 @@ Similarity search
                         <th>DM200<br></br>20 bar</th>
                         <th>DM300<br></br>20 bar</th>
                     </tr>
-                        <tr>
-                            <td>{{ tasks[0] }}</td>
-                            <td>{{ tasks[1] }}</td>
-                            <td><img src="{{url_for('static', filename='dataset_image.png')}}" alt="dataset_image" height="100" width="100"></td>
-                            <td>{{ tasks[2] }}</td>
-                            <td>{{ tasks[3] }}</td>
-                            <td>{{ tasks[4] }}</td>
-                            <td>{{ tasks[5] }}</td>
-                            <td>{{ tasks[6] }}</td>
-                            <td>{{ tasks[7] }}</td>
-                            <td>{{ tasks[8] }}</td>
-                            
-                        </tr>
+                    <tr>
+                        <td>{{ tasks[0] }}</td>
+                        <td>{{ tasks[1] }}</td>
+                        <td><img src="{{url_for('static', filename='dataset_image.png')}}" alt="dataset_image"
+                                height="100" width="100"></td>
+                        <td>{{ tasks[2] }}</td>
+                        <td>{{ tasks[3] }}</td>
+                        <td>{{ tasks[4] }}</td>
+                        <td>{{ tasks[5] }}</td>
+                        <td>{{ tasks[6] }}</td>
+                        <td>{{ tasks[7] }}</td>
+                        <td>{{ tasks[8] }}</td>
+
+                    </tr>
                 </thead>
                 <tbody>
                 </tbody>
-              </table> 
+            </table>
             {% endif %}
-        
+
             <div class="form">
                 <form style="text-align: center" action="/similarity" method="POST">
                     <input type="text" name="content" id="content" placeholder="CCCCBr">
@@ -64,15 +62,15 @@ Similarity search
                 </form>
             </div>
             <p></p>
-            <p>The 'Dataset SMILES' refers to the closest molecule in the dataset 
+            <p>The 'Dataset SMILES' refers to the closest molecule in the dataset
                 measured in our experiments (more information under the Contact page).
-                The Tanimoto coefficient refers to the similarity between your molecule and the closest molecule in the dataset.
+                The Tanimoto coefficient refers to the similarity between your molecule and the closest molecule in
+                the dataset.
             </p>
         </div>
 
     </div>
-  </div>
-
+</div>
 
 <!-- 
 <div class="card">

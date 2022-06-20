@@ -1,2 +1,3 @@
 testelek.ipynb
-/__pycache__
+__pycache__/
+templates/plot.html
