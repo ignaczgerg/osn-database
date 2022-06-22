@@ -30,10 +30,10 @@ Enantioseparation
         <p class="card-text" style="font-size:130%">
             The enantiomeric excess and recovery values are calculated for three different OSN configurations:</p>
         <ul class="card-text" style="font-size:130%">
-            <li>Single stage nanofiltration</li>
-            <li>Single stage nanofiltration with retentate stream racemization and recycling (SRR). Calculations assume
-                99% racemization in the reactor.</li>
-            <li>Two-stage permeate cascade with recycling (where the volumetric flow of the permeate stream of the first
+            <li><b>Process 1:</b> Single stage nanofiltration</li>
+            <li><b>Process 2:</b> Single stage nanofiltration with retentate stream racemization and recycling (SRR). Calculations assume
+                99% racemization in the reactor. The racemization step enables recoveries higher than 100%.</li>
+            <li><b>Process 3:</b> Two-stage permeate cascade with recycling (where the volumetric flow of the permeate stream of the first
                 stage is equal to the feed flow). In this case the stage cut is defined for the overall process.</li>
         </ul>
         <p class="card-text" style="font-size:130%">
@@ -48,51 +48,76 @@ Enantioseparation
                 <div class="col">
                     <div class="h-100 p-5 bg-light border rounded-3">
                         <div class="text-center">
-                            <h6>Process 1: <b>Single stage</b></h6>
+                            <h6><b>Process 1</b></h6>
                         </div>
                         <p></p>
                         <p><img class="rounded" src="/static/ss_pad.png" alt="Card image cap" width="100%"></p>
+                        {% if tasks|length >= 1 %}
+                        {% if tasks[3] == "" %}
+                        <p></p>
+                        <div class="text-center">
+                            <img src="{{url_for('static', filename='theta_ss.png')}}" alt="most" width="75%" class="rounded">
+                        </div>
+                        {% endif %}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col">
                     <div class="h-100 p-5 bg-light border rounded-3">
                         <div class="text-center">
-                            <h6>Process 2: <b>SRR</b></h6>
+                            <h6><b>Process 2</b></h6>
                         </div>
                         <p></p>
                         <div class="text-center">
                             <p><img class="rounded" src="/static/srr_pad.png" alt="Card image cap" width=100%></p>
                         </div>
+                        {% if tasks|length >= 1 %}
+                        {% if tasks[3] == "" %}
+                        <p></p>
+                        <div class="text-center">
+                            <img src="{{url_for('static', filename='theta_srr.png')}}" alt="most" width="75%" class="rounded">
+                        </div>
+                        {% endif %}
+                        {% endif %}
                     </div>
                 </div>
                 <div class="col">
                     <div class="h-100 p-5 bg-light border rounded-3">
                         <div class="text-center">
-                            <h6>Process 3: <b>Permeate cascade</b></h6>
+                            <h6><b>Process 3</b></h6>
                         </div>
                         <p></p>
                         <div class="text-center">
                             <p><img class="rounded" src="/static/c01_pad.png" alt="Card image cap" width=100%></p>
                         </div>
+                        {% if tasks|length >= 1 %}
+                        {% if tasks[3] == "" %}
+                        <p></p>
+                        <div class="text-center">
+                            <img src="{{url_for('static', filename='theta_c01.png')}}" alt="most" width="75%" class="rounded">
+                        </div>
+                        {% endif %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
             <p></p>
             {% if tasks|length < 1 %} <p style="text-align: center">Please enter the values below!</p>
-            <div class="text-center">
-                <p style="color:dimgray">For racemic feed: 50% R product ratio</p>
-            </div>
             {% else %}
             <div class="text-center">
-                <p style="color:firebrick"><b> {{ tasks[3] }} </b></p>
+                <p style="color:#b22222"><b> {{ tasks[3] }} </b></p>
                 {% if tasks[3] == "" %}
-                <p> <img src="{{url_for('static', filename='theta.png')}}" alt="most" height="500" width="950"
-                        class="rounded"> </p>
+                <!-- <p> <img src="{{url_for('static', filename='theta.png')}}" alt="most" height="500" width="950"
+                        class="rounded"> </p> -->
                 <p><b>Current values: R rejection {{ tasks[0] }}%, S rejection {{ tasks[1] }}%, R product ratio {{
                             tasks[2] }}%</b></p>
                 {% endif %}
             </div>
             {% endif %}
+            <div class="text-center">
+                <p style="color:dimgray">For racemic feed: 50% R product ratio</p>
+            </div>
+            <p></p>
             <div class="collapse" id="spinnycol">
                 <div class="text-center" id="spinny">
                     <div class="spinner-border text-info" role="status">
