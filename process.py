@@ -139,7 +139,7 @@ class sys:
             # R0,Rr,Rp,c0,V_loop,n,m,F0,Fr0,Fp0,Frir,Frip,Fpir,Fpip
             n = len(self.ret_cells)
             m = len(self.per_cells)
-            print(str(n)+"-"+str(m)+" CASCADE")
+            # print(str(n)+"-"+str(m)+" CASCADE")
             R0_R = self.initial_cell.R[0]
             R0_S = self.initial_cell.R[1]
             Rr_R, Rr_S, Rp_R, Rp_S = [], [], [], []
