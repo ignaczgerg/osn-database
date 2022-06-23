@@ -31,9 +31,7 @@ Solute rejection prediction
                 href="https://doi.org/10.1016/j.memsci.2022.120268">original publication</a>
         </p>
         <div class="content">
-            {% if tasks|length < 1 %} <p style="text-align:center; font-size:130%; color: rgb(0, 0, 255)"> Please enter
-                your SMILES below!</p>
-            {% else %}
+            {% if tasks|length > 1 %} 
             <table class="table">
                 <thead>
                     <tr>
@@ -58,12 +56,25 @@ Solute rejection prediction
                 </tbody>
             </table>
             {% endif %}
-
+            {% if tasks|length == 0 %} 
+            <p style="text-align: center; font-size: 130%;">Please enter your SMILES below!</p>
+            {% else %}
+            <p style="color:#b22222; text-align: center;"><b> {{ tasks[-1] }} </b></p>
+            {% endif %}
             <div class="form">
                 <form style="text-align: center" action="/pls-prediction" method="POST">
                     <input type="text" name="content" id="content" placeholder='CCCCBr'>
                     <input type="submit" value="Predict rejection">
                 </form>
+                <!--script to disable the submit button -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+                </script>
+                <script type="text/javascript">
+                    $('#myform').one('submit', function() {
+                        $(this).find('input[type="submit"]').attr('disabled', 'disabled');
+                    });
+                </script>
+                <!--script ends here-->
             </div>
         </div>
     </div>

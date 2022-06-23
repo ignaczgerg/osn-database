@@ -1,3 +1,5 @@
+from argparse import ArgumentError
+from distutils.log import error
 from flask import Flask, render_template, url_for, request, redirect
 from mordred._base.descriptor import Descriptor
 from similarity_calc import DataLoader, Similarity
@@ -46,26 +48,29 @@ def similarity():
     if request.method == 'POST':
         user_smiles = request.form['content']
         comparing_dataset = DataLoader.csv_loader('data/osn_data_similarity.csv')
+        error_handling = ""
+        
         try:
             similar = Similarity.rejection_similarity(comparing_dataset, reference=user_smiles)
+            Draw.MolToFile(similar[1],'static/dataset_image.png') 
         except:
-            return 'Wrong SMILES, please try again'
+            error_handling = "There was an error adding your molecule. Please check the SMILES if they are correct. The model works reliably for molecules between 50-1000 g/mol having no metal ions."
 
-        Draw.MolToFile(similar[1],'static/dataset_image.png') 
-        retrieved_features = [user_smiles, 
-                                str(similar[2].iloc[0]),
-                                round(similar[0][1],2), 
-                                int(similar[2].iloc[1]*100),
-                                int(similar[2].iloc[2]*100),
-                                int(similar[2].iloc[3]*100),
-                                int(similar[2].iloc[4]*100),
-                                int(similar[2].iloc[5]*100),
-                                int(similar[2].iloc[6]*100)]
-        try:
-            return render_template("similarity.html", tasks = retrieved_features)
-        except:
-            return 'There was an error adding your molecule. Please check the SMILES if they are correct. The model works reliably for molecules between 50-1000 g/mol having no metal ions.'
-
+        if error_handling == "":
+            retrieved_features = [user_smiles, 
+                                    str(similar[2].iloc[0]),
+                                    round(similar[0][1],2), 
+                                    int(similar[2].iloc[1]*100),
+                                    int(similar[2].iloc[2]*100),
+                                    int(similar[2].iloc[3]*100),
+                                    int(similar[2].iloc[4]*100),
+                                    int(similar[2].iloc[5]*100),
+                                    int(similar[2].iloc[6]*100),
+                                    error_handling]
+        else:
+            retrieved_features = [error_handling]
+            
+        return render_template("similarity.html", tasks = retrieved_features)
     if request.method == "GET":
         return render_template("similarity.html")
 
@@ -74,21 +79,24 @@ def similarity():
 def pls_prediction():
     if request.method == 'POST':
         user_smiles = request.form['content']
-        #comparing_dataset = DataLoader.csv_loader('data/osn_data_similarity.csv')
+        error_handling = ""
         try:
-        #    similar = Similarity.rejection_similarity(comparing_dataset, reference=user_smiles)
             user_descr = predictor.descripter(user_smiles)
             prediction = predictor.predictor(user_descr)
+            Draw.MolToFile(Chem.MolFromSmiles(user_smiles),'static/dataset_image.png')
         except:
-            return 'Wrong SMILES, please try again. Currently, molecules with more than 5 heavy atoms work only.'
+            error_handling = 'Wrong SMILES, please try again. Currently, molecules with more than 5 heavy atoms work only.'
 
-        Draw.MolToFile(Chem.MolFromSmiles(user_smiles),'static/dataset_image.png') 
-        retrieved_features = [user_smiles, 
-                                round(prediction[0][0], 3)*100]
-        try:
-            return render_template("pls-prediction.html", tasks = retrieved_features)
-        except:
-            return 'There was an error adding your task'
+
+        if error_handling == "":
+            retrieved_features = [user_smiles, 
+                                    round(prediction[0][0], 3)*100,
+                                    error_handling]
+        else:
+            retrieved_features = [error_handling]
+        
+        return render_template("pls-prediction.html", tasks = retrieved_features)
+
     if request.method == "GET":
         return render_template("pls-prediction.html")
 
@@ -127,9 +135,10 @@ def what_is_osn():
         return render_template('what_is_osn.html')
     return render_template('what_is_osn.html')
 
-@app.route('/plot', methods=['GET', 'POST'])
-def plot():
-    pass
+# temp function for easier plotting.
+# @app.route('/plot', methods=['GET', 'POST'])
+# def plot():
+#     pass
 
 @app.route('/enantioseparation', methods=['GET', 'POST'])
 def enantioseparation():
@@ -157,13 +166,16 @@ def enantioseparation():
         if output == "":
             theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, eta_Sr, eta_Sp, ee2R, ee2S, eta2R, eta2S, ee3Rr, ee3Rp, ee3Sr, ee3Sp, eta3Rr, eta3Rp, eta3Sr, eta3Sp = calculate_values(user_r_rejection, user_s_rejection, user_r_racemate)
             plotting(theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, eta_Sr, eta_Sp, ee2R, ee2S, eta2R, eta2S, ee3Rr, ee3Rp, ee3Sr, ee3Sp, eta3Rr, eta3Rp, eta3Sr, eta3Sp)
+        
+        
         retrieved_features = [user_r_rejection,
                                 user_s_rejection,
-                                    user_r_racemate, output]
+                                user_r_racemate, 
+                                output]
         return render_template('enantioseparation.html', tasks=retrieved_features)
     if request.method == 'GET':
         return render_template('enantioseparation.html')
 
 
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run(debug=True)
