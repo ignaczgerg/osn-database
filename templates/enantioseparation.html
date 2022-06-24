@@ -102,15 +102,17 @@ Enantioseparation
                 </div>
             </div>
             <p></p>
-            {% if tasks|length < 1 %} <p style="text-align: center">Please enter the values below!</p>
+            {% if tasks|length < 1 %} 
+            <div class="p-1 mb-1 bg-secondary text-white">
+                <p style="text-align: center; margin-bottom:0;"><b>Please enter the values below!</b></p>
+            </div>
             {% else %}
             <div class="text-center">
                 <p style="color:#b22222"><b> {{ tasks[3] }} </b></p>
                 {% if tasks[3] == "" %}
-                <!-- <p> <img src="{{url_for('static', filename='theta.png')}}" alt="most" height="500" width="950"
-                        class="rounded"> </p> -->
-                <p><b>Current values: R rejection {{ tasks[0] }}%, S rejection {{ tasks[1] }}%, R product ratio {{
-                            tasks[2] }}%</b></p>
+                <div class="p-1 mb-1 bg-info text-white">
+                    <p style="margin-bottom:0;">Current values: <b>R rejection {{ tasks[0] }}%, S rejection {{ tasks[1] }}%, R product ratio {{ tasks[2] }}%</b></p>
+                </div>
                 {% endif %}
             </div>
             {% endif %}
@@ -131,9 +133,26 @@ Enantioseparation
                     <input type="text" name="r_rejection" id="r_rejection" placeholder='Rejection of R in %'>
                     <input type="text" name="s_rejection" id="s_rejection" placeholder='Rejection of S in %'>
                     <input type="text" name="racemate" id="racemate" placeholder='R product ratio in %'>
+                    <!-- <div class="row justify-content-center">
+                        <div class="col-md-auto">
+                            <p style="text-align: right; margin-bottom:0;">R rejection</p>
+                        </div>
+                        <div class="col-2">
+                            <p style="text-align: center; margin-bottom:0;">S rejection</p>
+                        </div>
+                        <div class="col-md-auto">
+                            <p style="text-align: left; margin-bottom:0;">50% for racemic feed</p>
+                        </div>
+                    </div> -->
                     <br></br>
-                    <input type="submit" value="Predict" data-toggle="collapse" data-target="#spinnycol">
+                    <input type="submit" value="Predict" data-toggle="collapse" data-target="#spinnycol" class="btn btn-info btn-sm">
+                    <input class="btn btn-secondary btn-sm" type="submit" value="Home page" formaction="/" formmethod = "GET" />
                 </form>
+                <p></p>
+                <!-- <form style="text-align: center" action="/" method="GET" id="backhome" style="float: left;">
+                <input class="btn btn-secondary btn-sm" type="submit" value="Back home" />
+                </form> -->
+                
                 <!--script to disable the submit button -->
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
                 </script>
@@ -143,6 +162,7 @@ Enantioseparation
                     });
                 </script>
                 <!--script ends here-->
+            <!-- <input type="submit" value="Predict" data-toggle="collapse" data-target="#spinnycol" class="btn btn-info btn-sm"> -->
             </div>
             <p>
 

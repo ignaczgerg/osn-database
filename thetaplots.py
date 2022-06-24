@@ -253,13 +253,13 @@ def plotting(theta, theta2, theta3, ee_Rr, ee_Rp, ee_Sr, ee_Sp, eta_Rr, eta_Rp, 
 
     
     filepath_ss = 'static/theta_ss.png'
-    fig_ss.savefig(filepath_ss, dpi=500, bbox_inches='tight')
+    fig_ss.savefig(filepath_ss, dpi=500, bbox_inches='tight', transparent = True, pad_inches=0)
 
     filepath_srr = 'static/theta_srr.png'
-    fig_srr.savefig(filepath_srr, dpi=500, bbox_inches='tight')
+    fig_srr.savefig(filepath_srr, dpi=500, bbox_inches='tight', transparent = True, pad_inches=0)
 
     filepath_c01 = 'static/theta_c01.png'
-    fig_c01.savefig(filepath_c01, dpi=500, bbox_inches='tight')
+    fig_c01.savefig(filepath_c01, dpi=500, bbox_inches='tight', transparent = True, pad_inches=0)
 
     # buf = BytesIO()
     # fig.savefig(buf, format='png')

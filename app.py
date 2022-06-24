@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for, request, redirect
 from mordred._base.descriptor import Descriptor
+# from pyrsistent import T
 from similarity_calc import DataLoader, Similarity
 import predictor
 from rdkit import Chem
@@ -22,17 +23,17 @@ import os
 # app = Flask(__name__, template_folder=tmpl_dir, static_folder=stat_dir)
 app = Flask(__name__)
 
+# issue to be solved: confirm form resubmission
 @app.after_request
-def add_header(r):
+def add_header(response):
     """
     Add headers to both force latest IE rendering engine or Chrome Frame,
     and also to cache the rendered page for 10 minutes.
     """
-    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-    r.headers["Pragma"] = "no-cache"
-    r.headers["Expires"] = "0"
-    r.headers['Cache-Control'] = 'public, max-age=0'
-    return r
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+    response.headers['Cache-Control'] = 'public, no-cache, no-store, max-age=0, must-revalidate'
+    return response
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -134,10 +135,9 @@ def plot():
 @app.route('/enantioseparation', methods=['GET', 'POST'])
 def enantioseparation():
     if request.method == 'POST':
-        user_r_rejection = request.form['r_rejection']
-        user_s_rejection = request.form['s_rejection']
-        user_r_racemate = request.form['racemate']
-
+        user_r_rejection = request.form.get('r_rejection')
+        user_s_rejection = request.form.get('s_rejection')
+        user_r_racemate = request.form.get('racemate')
         output = ""
 
         try:
@@ -150,7 +150,6 @@ def enantioseparation():
 
             if ratio >= 1 or ratio <= 0:
                 output = "Invalid input. Please enter a ratio value between 0 and 100% (excluding 0 and 100%)"
-            
         except ValueError:
             output = "Invalid input. Please enter numerical values"
 
