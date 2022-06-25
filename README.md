@@ -6,7 +6,9 @@ Our aim is to provide high quality data and online tools to the membrane communi
 # Current publications present on the website
 ## Diversity Matters: Widening the Chemical Space in Organic Solvent Nanofiltration
 Gergo Ignacz, Cong Yang, Gyorgy Szekely*
+
 Link: https://doi.org/10.1016/j.memsci.2021.119929
+
 Advanced Membranes and Porous Materials Center, Physical Science and Engineering Division (PSE), King Abdullah University of Science and Technology (KAUST), Thuwal, 23955-6900, Saudi Arabia	
 *gyorgy.szekely@kaust.edu.sa, www.szekelygroup.com, +966128082769
 
@@ -20,7 +22,9 @@ Advanced Membranes and Porous Materials Center, Physical Science and Engineering
 
 ## Deep learning meets quantitative structure–activity relationship (QSAR) for leveraging structure-based prediction of solute rejection in organic solvent nanofiltration
 Gergo Ignacz, Gyorgy Szekely*
+
 Link: https://doi.org/10.1016/j.memsci.2022.120268
+
 Advanced Membranes and Porous Materials Center, Physical Science and Engineering Division (PSE), King Abdullah University of Science and Technology (KAUST), Thuwal, 23955-6900, Saudi Arabia	
 *gyorgy.szekely@kaust.edu.sa, www.szekelygroup.com, +966128082769
 
@@ -33,7 +37,9 @@ Advanced Membranes and Porous Materials Center, Physical Science and Engineering
 
 ## Artificial intelligence for performance prediction of organic solvent nanofiltration membranes
 Jiahui Hu, Changsu Kim, Peter Halasz, Jeong F. Kim, Jiyong Kim, Gyorgy Szekely*
+
 Link: https://doi.org/10.1016/j.memsci.2020.118513
+
 Advanced Membranes and Porous Materials Center, Physical Science and Engineering Division (PSE), King Abdullah University of Science and Technology (KAUST), Thuwal, 23955-6900, Saudi Arabia	
 *gyorgy.szekely@kaust.edu.sa, www.szekelygroup.com, +966128082769
 
