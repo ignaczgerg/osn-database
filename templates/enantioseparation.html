@@ -31,9 +31,11 @@ Enantioseparation
             The enantiomeric excess and recovery values are calculated for three different OSN configurations:</p>
         <ul class="card-text" style="font-size:130%">
             <li><b>Process 1:</b> Single stage nanofiltration</li>
-            <li><b>Process 2:</b> Single stage nanofiltration with retentate stream racemization and recycling (SRR). Calculations assume
+            <li><b>Process 2:</b> Single stage nanofiltration with retentate stream racemization and recycling (SRR).
+                Calculations assume
                 99% racemization in the reactor. The racemization step enables recoveries higher than 100%.</li>
-            <li><b>Process 3:</b> Two-stage permeate cascade with recycling (where the volumetric flow of the permeate stream of the first
+            <li><b>Process 3:</b> Two-stage permeate cascade with recycling (where the volumetric flow of the permeate
+                stream of the first
                 stage is equal to the feed flow). In this case the stage cut is defined for the overall process.</li>
         </ul>
         <p class="card-text" style="font-size:130%">
@@ -56,7 +58,8 @@ Enantioseparation
                         {% if tasks[3] == "" %}
                         <p></p>
                         <div class="text-center">
-                            <img src="{{url_for('static', filename='theta_ss.png')}}" alt="most" width="75%" class="rounded">
+                            <img src="{{url_for('static', filename='theta_ss.png')}}" alt="most" width="75%"
+                                class="rounded">
                         </div>
                         {% endif %}
                         {% endif %}
@@ -75,7 +78,8 @@ Enantioseparation
                         {% if tasks[3] == "" %}
                         <p></p>
                         <div class="text-center">
-                            <img src="{{url_for('static', filename='theta_srr.png')}}" alt="most" width="75%" class="rounded">
+                            <img src="{{url_for('static', filename='theta_srr.png')}}" alt="most" width="75%"
+                                class="rounded">
                         </div>
                         {% endif %}
                         {% endif %}
@@ -94,7 +98,8 @@ Enantioseparation
                         {% if tasks[3] == "" %}
                         <p></p>
                         <div class="text-center">
-                            <img src="{{url_for('static', filename='theta_c01.png')}}" alt="most" width="75%" class="rounded">
+                            <img src="{{url_for('static', filename='theta_c01.png')}}" alt="most" width="75%"
+                                class="rounded">
                         </div>
                         {% endif %}
                         {% endif %}
@@ -103,50 +108,50 @@ Enantioseparation
             </div>
             <p></p>
             {% if tasks|length < 1 %} <p style="text-align: center">Please enter the values below!</p>
-            {% else %}
-            <div class="text-center">
-                <p style="color:#b22222"><b> {{ tasks[3] }} </b></p>
-                {% if tasks[3] == "" %}
-                <!-- <p> <img src="{{url_for('static', filename='theta.png')}}" alt="most" height="500" width="950"
+                {% else %}
+                <div class="text-center">
+                    <p style="color:#b22222"><b> {{ tasks[3] }} </b></p>
+                    {% if tasks[3] == "" %}
+                    <!-- <p> <img src="{{url_for('static', filename='theta.png')}}" alt="most" height="500" width="950"
                         class="rounded"> </p> -->
-                <p><b>Current values: R rejection {{ tasks[0] }}%, S rejection {{ tasks[1] }}%, R product ratio {{
+                    <p><b>Current values: R rejection {{ tasks[0] }}%, S rejection {{ tasks[1] }}%, R product ratio {{
                             tasks[2] }}%</b></p>
+                    {% endif %}
+                </div>
                 {% endif %}
-            </div>
-            {% endif %}
-            <div class="text-center">
-                <p style="color:dimgray">For racemic feed: 50% R product ratio</p>
-            </div>
-            <p></p>
-            <div class="collapse" id="spinnycol">
-                <div class="text-center" id="spinny">
-                    <div class="spinner-border text-info" role="status">
-                        <span class="sr-only">Loading...</span>
+                <div class="text-center">
+                    <p style="color:dimgray">For racemic feed: 50% R product ratio</p>
+                </div>
+                <p></p>
+                <div class="collapse" id="spinnycol">
+                    <div class="text-center" id="spinny">
+                        <div class="spinner-border text-info" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <p></p>
-            <div class="form">
-                <form style="text-align: center" action="/enantioseparation#bottom" method="POST" id="myform">
-                    <input type="text" name="r_rejection" id="r_rejection" placeholder='Rejection of R in %'>
-                    <input type="text" name="s_rejection" id="s_rejection" placeholder='Rejection of S in %'>
-                    <input type="text" name="racemate" id="racemate" placeholder='R product ratio in %'>
-                    <br></br>
-                    <input type="submit" value="Predict" data-toggle="collapse" data-target="#spinnycol">
-                </form>
-                <!--script to disable the submit button -->
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
-                </script>
-                <script type="text/javascript">
-                    $('#myform').one('submit', function() {
-                        $(this).find('input[type="submit"]').attr('disabled', 'disabled');
-                    });
-                </script>
-                <!--script ends here-->
-            </div>
-            <p>
+                <p></p>
+                <div class="form">
+                    <form style="text-align: center" action="/enantioseparation#bottom" method="POST" id="myform">
+                        <input type="text" name="r_rejection" id="r_rejection" placeholder='Rejection of R in %'>
+                        <input type="text" name="s_rejection" id="s_rejection" placeholder='Rejection of S in %'>
+                        <input type="text" name="racemate" id="racemate" placeholder='R product ratio in %'>
+                        <br></br>
+                        <input type="submit" value="Predict" data-toggle="collapse" data-target="#spinnycol">
+                    </form>
+                    <!--script to disable the submit button -->
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+                    </script>
+                    <script type="text/javascript">
+                        $('#myform').one('submit', function () {
+                            $(this).find('input[type="submit"]').attr('disabled', 'disabled');
+                        });
+                    </script>
+                    <!--script ends here-->
+                </div>
+                <p>
 
-            </p>
+                </p>
         </div>
         <a name="bottom"></a>
     </div>
