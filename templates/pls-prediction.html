@@ -31,7 +31,7 @@ Solute rejection prediction
                 href="https://doi.org/10.1016/j.memsci.2022.120268">original publication</a>
         </p>
         <div class="content">
-            {% if tasks|length > 1 %} 
+            {% if tasks|length > 1 %}
             <table class="table">
                 <thead>
                     <tr>
@@ -56,7 +56,7 @@ Solute rejection prediction
                 </tbody>
             </table>
             {% endif %}
-            {% if tasks|length == 0 %} 
+            {% if tasks|length == 0 %}
             <p style="text-align: center; font-size: 130%;">Please enter your SMILES below!</p>
             {% else %}
             <p style="color:#b22222; text-align: center;"><b> {{ tasks[-1] }} </b></p>
@@ -70,7 +70,7 @@ Solute rejection prediction
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
                 </script>
                 <script type="text/javascript">
-                    $('#myform').one('submit', function() {
+                    $('#myform').one('submit', function () {
                         $(this).find('input[type="submit"]').attr('disabled', 'disabled');
                     });
                 </script>
